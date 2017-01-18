@@ -32,7 +32,7 @@ if [[ ! "$(python --version 2>&1)" =~ "3.5" ]]; then
     exit -1
 fi
 
-PYTHONPATH="$(package_root):$PYTHONPATH"
+export PYTHONPATH="$(package_root):$PYTHONPATH"
 export SERT_ROOT=$(python -c "import os; import sert; print(os.path.abspath(sert.__path__[0]))")
 
 # Verify that the correct sert library is selected.
@@ -42,10 +42,12 @@ if [[ ! "${SERT_ROOT}" =~ ^$(package_root) ]]; then
     exit -1
 fi
 
-PYTHONPATH="$(package_root)/cvangysel-common/py:$PYTHONPATH"
+export PYTHONPATH="$(package_root)/cvangysel-common/py:$PYTHONPATH"
 export CVANGYSEL_ROOT=$(python -c "import os; import cvangysel; print(os.path.abspath(cvangysel.__path__[0]))")
 
 # Verify that the correct cvangysel-common library is selected.
 if [[ ! "${CVANGYSEL_ROOT}" =~ ^$(package_root) ]]; then
     echo "WARNING: you are using an external version of cvangysel-common (${CVANGYSEL_ROOT})."
 fi
+
+#export PYTHONPATH=""
