@@ -74,7 +74,7 @@ def main():
 
                 product_document = io_utils.tokenize_text(product_document)
 
-                logging.debug('Product %s has description of %d tokens.',
+                logging.debug('Product %s has description of %d tokens.', product_id,
                               len(product_document))
 
                 writer.write_document(
